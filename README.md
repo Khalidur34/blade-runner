@@ -1,6 +1,8 @@
 # Blade Runner Carriage Control Program
 
 Welcome to the **Blade Runner Carriage Control Program** project repository. 
+Team Members:
+ - Khalidur Rahman
 
 ## Project: Blader Runner 2024
 

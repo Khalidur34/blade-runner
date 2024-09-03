@@ -2,6 +2,9 @@
 
 Welcome to the **Blade Runner Carriage Control Program** project repository. 
 
+## Contributors: 
+Fiha, Khalid, Kevin, Guryash, Avi, Josh
+
 ## Project: Blader Runner 2024
 
 The project aims to design, prototype, construct, and refine a section of an integrated mass transit system. Each team is responsible for developing a component of a collective machine, which will operate within an interconnected system to transport BladeRunners—suspended monorails—along a narrow, blade-like rail. This system will incorporate a messaging network to manage individual runners and an autonomous control mechanism to prevent collisions, coordinate movements between stops, and facilitate passenger boarding and disembarkation.

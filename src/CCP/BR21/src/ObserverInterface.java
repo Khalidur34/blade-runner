@@ -1,5 +1,3 @@
-package CCP.BR20;
-
 public abstract interface ObserverInterface {
-    public void update(); //add bladerunners varribles
+    public void update(boolean moving, String LED, boolean doorsOpen, int speed, String clientID); //add bladerunners varribles
 }

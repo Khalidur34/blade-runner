@@ -1,7 +1,7 @@
 public abstract interface SubjectInterface {
-    public void registerObserver();
+    public void registerObserver(SendingData ob);
 
     public void removeObserver();
 
-    public void notifyObservers();
+    public void notifyObservers(String a);
 }

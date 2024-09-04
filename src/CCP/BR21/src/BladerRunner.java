@@ -5,6 +5,8 @@ public class BladerRunner implements BladerRunnerInterface, SubjectInterface {
     int speed;
     String clientID;
 
+    SendingData Observer;
+
     public BladerRunner(boolean m, String L, boolean d, int s, String c) {
         moving = m;
         LED = L;
@@ -14,28 +16,32 @@ public class BladerRunner implements BladerRunnerInterface, SubjectInterface {
     }
     public void updateMoving(boolean m){
         moving = m;
-        notifyObservers();
+        notifyObservers("moving");
     }
     public void updateLED(String L){
         LED = L;
-        notifyObservers();
+        notifyObservers("LED");
     }
     public void updateDoorsOpen(boolean d){
         doorsOpen = d;
-        notifyObservers();
+        notifyObservers("doorsOpen");
     }
     public void updateSpeed(int s){
         speed = s;
-        notifyObservers();
+        notifyObservers("speed");
     }
     public void updateClientID(String c){
         clientID = c;
-        notifyObservers();
+        notifyObservers("clientID");
     }
 
-    public void registerObserver(){}
+    public void registerObserver(SendingData ob){
+        Observer = ob;
+    }
 
     public void removeObserver(){}
 
-    public void notifyObservers(){}
+    public void notifyObservers(String a){
+       Observer.update(moving, LED, doorsOpen, speed, clientID, a); //it is suposed to get the observer declared object and use the update method.
+    }
 }

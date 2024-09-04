@@ -1,5 +1,5 @@
 package CCP.BR20;
 
-public class SendingData implements DataInterface {
+public class SendingData implements DataInterface, ObserverInterface {
     
 }

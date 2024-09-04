@@ -23,11 +23,11 @@ public class SendingData implements DataInterface, ObserverInterface {
         JSONObject jsonObject = new JSONObject();
         //Inserting key-value pairs into the json object
         jsonObject.put("ID", "1");
-        jsonObject.put("First_Name", "Shikhar");
-        jsonObject.put("Last_Name", "Dhawan");
+        jsonObject.put("First_Name", "test");
+        jsonObject.put("Last_Name", "test2");
         jsonObject.put("Date_Of_Birth", "1981-12-05");
-        jsonObject.put("Place_Of_Birth", "Delhi");
-        jsonObject.put("Country", "India");
+        jsonObject.put("Place_Of_Birth", "test3");
+        jsonObject.put("Country", "test4");
         try {
            FileWriter file = new FileWriter("E:/output.json");
            file.write(jsonObject.toJSONString());

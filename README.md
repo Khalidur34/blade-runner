@@ -1,9 +1,6 @@
 # Blade Runner Carriage Control Program
 
 Welcome to the **Blade Runner Carriage Control Program** project repository.
-Members
-
-- Kevin La 45229082
 
 ## Project: Blader Runner 2024
 

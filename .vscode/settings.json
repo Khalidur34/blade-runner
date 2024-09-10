@@ -1,0 +1,8 @@
+{
+  "java.project.sourcePaths": ["src\\CCP\\BR21\\src"],
+  "java.project.referencedLibraries": [
+    "src\\CCP\\BR21\\libs\\jackson-annotations-2.13.3.jar",
+    "src\\CCP\\BR21\\libs\\jackson-core-2.13.3.jar",
+    "src\\CCP\\BR21\\libs\\jackson-databind-2.13.3.jar"
+  ]
+}

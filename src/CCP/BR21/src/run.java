@@ -16,7 +16,9 @@ public class run {
     }
 
     public void setup() throws SocketException, UnknownHostException{
-        new CCPServer(new DatagramSocket(4302),500).run();
+         CCPServer a = new CCPServer(new DatagramSocket(4302),500);
+         a.start();
+     //    a.run();
         client = new UDPClient();
     }
 

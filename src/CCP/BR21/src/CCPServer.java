@@ -3,7 +3,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
 
-public class CCPServer extends Thread {
+public class CCPServer implements Runnable {
 
     private DatagramSocket socket;
     private byte[] buf;
@@ -22,7 +22,9 @@ public class CCPServer extends Thread {
                 // Recieve DatagramPacket and extract JSON payload
                 DatagramPacket packet = new DatagramPacket(buf, buf.length);
                 socket.receive(packet);
-                
+
+                System.out.println("PACKAGE RECIEVED");
+
                 String jsonPayload = new String(packet.getData(), 0, packet.getLength());
                 System.out.println("Received JSON: " + jsonPayload);
 

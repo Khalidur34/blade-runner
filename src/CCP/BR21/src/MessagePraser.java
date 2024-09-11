@@ -11,14 +11,15 @@ import org.json.simple.parser.JSONParser;
 public class MessagePraser implements DataInterface {
 
     public static void readJsonMessage(String jsonString) {
+        System.out.println("!!! Prasing Message !!!");
         try {
-
             JSONParser parser = new JSONParser();
             JSONObject json = (JSONObject) parser.parse(jsonString);
 
             String message = (String) json.get("message");
 
             System.out.println(message);
+            System.out.println(json.toString());
 
         } catch (Exception e) {
             e.printStackTrace();

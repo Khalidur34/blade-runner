@@ -14,11 +14,11 @@ public class CCPServer extends Thread {
     private byte[] buf;
     private boolean running;
 
+    // Create socket address from port number and IP,
+    // Create port to listen on socket address,
+    // Set message size
     public CCPServer(int portNumber, String address, int messageSize)
             throws SocketException, UnknownHostException {
-        // Create socket address from port number and IP,
-        // Create port to listen on socket address,
-        // Set message size
         this.socketAddress = new InetSocketAddress(InetAddress.getByName(address), portNumber);
         this.socket = new DatagramSocket(this.socketAddress);
         this.buf = new byte[messageSize];

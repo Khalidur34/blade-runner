@@ -6,14 +6,14 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 
 public class UDPClient {
-   
+
     private InetAddress addr;
     private DatagramSocket sock;
-    
 
     public UDPClient() throws SocketException, UnknownHostException {
         sock = new DatagramSocket();
-        addr = InetAddress.getByName("10.20.30.177");
+        // 10.20.30.177
+        addr = InetAddress.getByName("localhost");
     }
 
     public void send(String msg) throws IOException {

@@ -21,6 +21,7 @@ public class CCPServer extends Thread {
             try {
                 DatagramPacket packet = new DatagramPacket(buf, buf.length);
                 socket.receive(packet);
+                
                 String jsonPayload = new String(packet.getData(), 0, packet.getLength());
 
                 System.out.println("Received JSON: " + jsonPayload);

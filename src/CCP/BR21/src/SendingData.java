@@ -1,47 +1,48 @@
-import java.io.FileWriter;
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;  
 import java.time.LocalDateTime;
 
 import org.json.simple.JSONObject; // currently the json simple libary is not working not sure why
 
 final public class SendingData implements DataInterface, ObserverInterface {
+    
     static public void update(String LED, boolean doorsOpen, int speed, String clientID, String changed){
+        JSONObject jsonObject = new JSONObject();
         if(changed.equals("doorsOpen")){
-
+            jsonObject.put("Door", doorsOpen);
+            jsonObject.put("LED", LED);
         }
         if(changed.equals("speed")){
-
+            jsonObject.put("Speed", speed);
+            jsonObject.put("LED", LED);    
+            
         }
-        if(changed.equals("clientID")){
-
-        }
-        boolean test = true;
+    }
+    static public void directUpdate(String m, String clientID, String Status){
         JSONObject jsonObject = new JSONObject();
-        
         LocalDateTime now = LocalDateTime.now();
-        if(test){
+        if(m.equals("CCIN")){
             jsonObject.put("client_type", "ccp");
             jsonObject.put("message", "CCIN");
             jsonObject.put("client_id", clientID);
             jsonObject.put("Timestamp", now);
         }
-        if(!test){
+        if(m.equals("STAT")){
             jsonObject.put("client_type", "ccp");
             jsonObject.put("message", "STAT");
             jsonObject.put("client_id", clientID);
             jsonObject.put("Timestamp", now);
-            jsonObject.put("status", "STOPPED/STARTED/ON/OFF/ERR/CRASH");
+            jsonObject.put("status", Status);
         }
-        
-        else {
+        if(m.equals("STAT_STATION")) {
             jsonObject.put("client_type", "ccp");
             jsonObject.put("message", "STAT");
             jsonObject.put("client_id", clientID);
             jsonObject.put("Timestamp", now);
             jsonObject.put("status", "STOPPED_AT_STATION");
             jsonObject.put("station_id", "STXX");
-        }   
+        } 
+        
+  
         try {
             UDPClient client = new UDPClient();
             client.send(jsonObject.toString());
@@ -49,7 +50,6 @@ final public class SendingData implements DataInterface, ObserverInterface {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
     }
 }
 

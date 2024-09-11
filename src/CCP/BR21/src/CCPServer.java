@@ -1,47 +1,38 @@
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.InetAddress;
 import java.net.SocketException;
+
 
 public class CCPServer extends Thread {
 
-    public static void main(String args) {
-        System.out.println("Test RUNNING");
-    }
-
     private DatagramSocket socket;
+    private byte[] buf;
     private boolean running;
-    private byte[] buf = new byte[256];
 
-    public CCPServer() throws SocketException {
-        socket = new DatagramSocket(3001);
+    public CCPServer(DatagramSocket socket, int messageSize) throws SocketException {
+       this.socket = socket;
+       this.buf = new byte[messageSize];
     }
 
     public void run() {
         running = true;
-
         while (running) {
             try {
                 DatagramPacket packet = new DatagramPacket(buf, buf.length);
                 socket.receive(packet);
+                String jsonPayload = new String(packet.getData(), 0, packet.getLength());
 
-                InetAddress address = packet.getAddress();
-                int port = packet.getPort();
-                packet = new DatagramPacket(buf, buf.length, address, port);
-                String received = new String(packet.getData(), 0, packet.getLength());
+                System.out.println("Received JSON: " + jsonPayload);
 
-                if (received.equals("end")) {
-                    running = false;
-                    continue;
-                }
+                MessagePraser praser = new MessagePraser();
+                praser.readJsonMessage(jsonPayload);
                 socket.send(packet);
             } catch (IOException e) {
                 e.printStackTrace();
                 running = false; // Stop the server if there's an IO exception
             }
         }
-
         socket.close();
     }
 }

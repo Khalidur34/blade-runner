@@ -1,8 +1,4 @@
 import java.io.IOException;
-import java.net.DatagramSocket;
-import java.net.SocketException;
-import java.net.UnknownHostException;
-import org.json.simple.JSONObject;
 
 public class testKevin {
     UDPClient client;

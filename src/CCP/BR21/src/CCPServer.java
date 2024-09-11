@@ -3,7 +3,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
 
-public class CCPServer implements Runnable {
+public class CCPServer extends Thread {
 
     private DatagramSocket socket;
     private byte[] buf;

@@ -9,10 +9,10 @@ public class testKevin {
 
     public static void main(String[] args) throws IOException {
         System.out.println("!!! Program Started !!!");
-        CCPServer server = new CCPServer(2000, "localhost", 1024);
+        CCPServer server = new CCPServer(4302, "localhost", 1024);
         server.start();
 
-        SendingData.update("womp", false, 0, "BR20", "that one");
+        SendingData.directUpdate("CCIN", "BR20", "that one");
     }
 
 }

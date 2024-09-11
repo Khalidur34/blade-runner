@@ -17,6 +17,7 @@ public class UDPClient {
 
     public void send(String msg) throws IOException {
         byte[] byt = msg.getBytes();
+        System.out.println(msg);
         DatagramPacket packet = new DatagramPacket(byt, byt.length, addr, 4302);
         sock.send(packet);
     }

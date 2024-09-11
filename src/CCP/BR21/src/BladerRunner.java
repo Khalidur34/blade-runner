@@ -7,24 +7,24 @@ public class BladerRunner implements BladerRunnerInterface, SubjectInterface {
     int speed;
     String clientID;
 
-    SendingData Observer;
-
     public BladerRunner(String L, boolean d, int s, String c) {
         LED = L;
         doorsOpen = d;
         speed = s;
         clientID = c;
     }
-    public void updateLED(String L){
-        LED = L;
-        notifyObservers("LED");
-    }
     public void updateDoorsOpen(boolean d){
         doorsOpen = d;
+        LED = "#a432a8"; // purple
         notifyObservers("doorsOpen");
     }
     public void updateSpeed(int s){
         speed = s;
+        if(speed > 0)
+            LED = "#b00c0c"; //red
+        else 
+            LED = "#27b00c"; // green
+        
         notifyObservers("speed");
     }
     public void updateClientID(String c){
@@ -32,13 +32,7 @@ public class BladerRunner implements BladerRunnerInterface, SubjectInterface {
         notifyObservers("clientID");
     }
 
-    public void registerObserver(SendingData ob){
-        Observer = ob;
-    }
-
-    public void removeObserver(){}
-
     public void notifyObservers(String a){
-       Observer.update(LED, doorsOpen, speed, clientID, a);
+       SendingData.update(LED, doorsOpen, speed, clientID, a);
     }
 }

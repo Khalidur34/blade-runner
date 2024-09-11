@@ -24,6 +24,6 @@ public class run {
 
    
     public void whenCanSendAndReceivePacket_thenCorrect() {
-        SendingData.update(true,"womp",false,0,"BR20","that one");
+        SendingData.update("womp",false,0,"BR20","that one");
     }
 }

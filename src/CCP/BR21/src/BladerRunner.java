@@ -9,16 +9,11 @@ public class BladerRunner implements BladerRunnerInterface, SubjectInterface {
 
     SendingData Observer;
 
-    public BladerRunner(boolean m, String L, boolean d, int s, String c) {
-        moving = m;
+    public BladerRunner(String L, boolean d, int s, String c) {
         LED = L;
         doorsOpen = d;
         speed = s;
         clientID = c;
-    }
-    public void updateMoving(boolean m){
-        moving = m;
-        notifyObservers("moving");
     }
     public void updateLED(String L){
         LED = L;
@@ -44,6 +39,6 @@ public class BladerRunner implements BladerRunnerInterface, SubjectInterface {
     public void removeObserver(){}
 
     public void notifyObservers(String a){
-       Observer.update(moving, LED, doorsOpen, speed, clientID, a);
+       Observer.update(LED, doorsOpen, speed, clientID, a);
     }
 }

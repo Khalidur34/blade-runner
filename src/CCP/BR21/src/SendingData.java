@@ -1,16 +1,12 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime;
 
 import org.json.simple.JSONObject; // currently the json simple libary is not working not sure why
 
 final public class SendingData implements DataInterface, ObserverInterface {
-    static public void update(boolean moving, String LED, boolean doorsOpen, int speed, String clientID, String changed){
-        if(changed.equals("moving")){
-            
-        }
-        if(changed.equals("LED")){
-
-        }
+    static public void update(String LED, boolean doorsOpen, int speed, String clientID, String changed){
         if(changed.equals("doorsOpen")){
 
         }
@@ -23,19 +19,18 @@ final public class SendingData implements DataInterface, ObserverInterface {
         boolean test = true;
         JSONObject jsonObject = new JSONObject();
         
-
-       System.out.println(jsonObject.toString());
+        LocalDateTime now = LocalDateTime.now();
         if(test){
             jsonObject.put("client_type", "ccp");
             jsonObject.put("message", "CCIN");
             jsonObject.put("client_id", clientID);
-            jsonObject.put("Timestamp", "2019-09-07T15:50+00Z");
+            jsonObject.put("Timestamp", now);
         }
         if(!test){
             jsonObject.put("client_type", "ccp");
             jsonObject.put("message", "STAT");
             jsonObject.put("client_id", clientID);
-            jsonObject.put("Timestamp", "2019-09-07T15:50+00Z");
+            jsonObject.put("Timestamp", now);
             jsonObject.put("status", "STOPPED/STARTED/ON/OFF/ERR/CRASH");
         }
         
@@ -43,7 +38,7 @@ final public class SendingData implements DataInterface, ObserverInterface {
             jsonObject.put("client_type", "ccp");
             jsonObject.put("message", "STAT");
             jsonObject.put("client_id", clientID);
-            jsonObject.put("Timestamp", "2019-09-07T15:50+00Z");
+            jsonObject.put("Timestamp", now);
             jsonObject.put("status", "STOPPED_AT_STATION");
             jsonObject.put("station_id", "STXX");
         }   

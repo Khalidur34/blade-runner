@@ -7,28 +7,22 @@ import java.net.UnknownHostException;
 
 public class UDPClient {
    
-    private InetAddress address;
-    private DatagramSocket socket;
-    private byte[] buf;
+    private InetAddress addr;
+    private DatagramSocket sock;
+    
 
     public UDPClient() throws SocketException, UnknownHostException {
-        socket = new DatagramSocket();
-        address = InetAddress.getByName("localhost");
+        sock = new DatagramSocket();
+        addr = InetAddress.getByName("10.20.30.1");
     }
 
-    public String sendEcho(String msg) throws IOException {
-        buf = msg.getBytes();
-        DatagramPacket packet 
-          = new DatagramPacket(buf, buf.length, address, 4445);
-        socket.send(packet);
-        packet = new DatagramPacket(buf, buf.length);
-        socket.receive(packet);
-        String received = new String(
-          packet.getData(), 0, packet.getLength());
-        return received;
+    public void send(String msg) throws IOException {
+        byte[] byt = msg.getBytes();
+        DatagramPacket packet = new DatagramPacket(byt, byt.length, addr, 2001);
+        sock.send(packet);
     }
 
     public void close() {
-        socket.close();
+        sock.close();
     }
 }

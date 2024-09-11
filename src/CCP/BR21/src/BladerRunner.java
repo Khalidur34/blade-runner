@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class BladerRunner implements BladerRunnerInterface, SubjectInterface {
     boolean moving;
     String LED;
@@ -42,6 +44,6 @@ public class BladerRunner implements BladerRunnerInterface, SubjectInterface {
     public void removeObserver(){}
 
     public void notifyObservers(String a){
-       Observer.update(moving, LED, doorsOpen, speed, clientID, a); //it is suposed to get the observer declared object and use the update method.
+       Observer.update(moving, LED, doorsOpen, speed, clientID, a);
     }
 }

@@ -1,11 +1,12 @@
 import java.io.FileWriter;
 import java.io.IOException;
+
 import org.json.simple.JSONObject; // currently the json simple libary is not working not sure why
 
-public class SendingData implements DataInterface, ObserverInterface {
-    public void update(boolean moving, String LED, boolean doorsOpen, int speed, String clientID, String changed){
+final public class SendingData implements DataInterface, ObserverInterface {
+    static public void update(boolean moving, String LED, boolean doorsOpen, int speed, String clientID, String changed){
         if(changed.equals("moving")){
-
+            
         }
         if(changed.equals("LED")){
 
@@ -19,32 +20,51 @@ public class SendingData implements DataInterface, ObserverInterface {
         if(changed.equals("clientID")){
 
         }
-        // need to create a jason file that communicates with the hardware to indecate what needs to happen
+        boolean test = true;
         JSONObject jsonObject = new JSONObject();
-        //Inserting key-value pairs into the json object
-        jsonObject.put("ID", "1");
-        jsonObject.put("First_Name", "test");
-        jsonObject.put("Last_Name", "test2");
-        jsonObject.put("Date_Of_Birth", "1981-12-05");
-        jsonObject.put("Place_Of_Birth", "test3");
-        jsonObject.put("Country", "test4");
-        try {
-           FileWriter file = new FileWriter("E:/output.json");
-           file.write(jsonObject.toJSONString());
-           file.close();
-        } catch (IOException e) {
-           // TODO Auto-generated catch block
-           e.printStackTrace();
-        }
-        System.out.println("JSON file created: "+jsonObject);
+        
 
-//         "client_type": "ccp",
-// "message": "STAT",
-// "client_id": "BRXX",
-// "timestamp":
-// "2019-09-07T15:50+00Z",
-// "status":
-// "STOPPED_AT_STATION",
-// "station_id": "STXX"
+       System.out.println(jsonObject.toString());
+        if(test){
+            jsonObject.put("client_type", "ccp");
+            jsonObject.put("message", "CCIN");
+            jsonObject.put("client_id", clientID);
+            jsonObject.put("Timestamp", "2019-09-07T15:50+00Z");
+        }
+        if(!test){
+            jsonObject.put("client_type", "ccp");
+            jsonObject.put("message", "STAT");
+            jsonObject.put("client_id", clientID);
+            jsonObject.put("Timestamp", "2019-09-07T15:50+00Z");
+            jsonObject.put("status", "STOPPED/STARTED/ON/OFF/ERR/CRASH");
+        }
+        
+        else {
+            jsonObject.put("client_type", "ccp");
+            jsonObject.put("message", "STAT");
+            jsonObject.put("client_id", clientID);
+            jsonObject.put("Timestamp", "2019-09-07T15:50+00Z");
+            jsonObject.put("status", "STOPPED_AT_STATION");
+            jsonObject.put("station_id", "STXX");
+        }   
+        try {
+            UDPClient client = new UDPClient();
+            client.send(jsonObject.toString());
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
     }
 }
+
+
+
+        // try {
+        //    FileWriter file = new FileWriter("E:/output.json");
+        //    file.write(jsonObject.toJSONString());
+        //    file.close();
+        // } catch (IOException e) {
+        //    e.printStackTrace();
+        // }
+        // System.out.println("JSON file created: "+jsonObject);

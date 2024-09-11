@@ -13,7 +13,7 @@ public class UDPClient {
 
     public UDPClient() throws SocketException, UnknownHostException {
         sock = new DatagramSocket();
-        addr = InetAddress.getByName("10.20.30.1");
+        addr = InetAddress.getByName("localhost");
     }
 
     public void send(String msg) throws IOException {

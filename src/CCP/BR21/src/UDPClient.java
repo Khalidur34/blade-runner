@@ -13,12 +13,12 @@ public class UDPClient {
 
     public UDPClient() throws SocketException, UnknownHostException {
         sock = new DatagramSocket();
-        addr = InetAddress.getByName("localhost");
+        addr = InetAddress.getByName("10.20.30.177");
     }
 
     public void send(String msg) throws IOException {
         byte[] byt = msg.getBytes();
-        DatagramPacket packet = new DatagramPacket(byt, byt.length, addr, 4302);
+        DatagramPacket packet = new DatagramPacket(byt, byt.length, addr, 2000);
         sock.send(packet);
     }
 

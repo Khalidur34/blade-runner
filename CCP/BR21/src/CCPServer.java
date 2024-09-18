@@ -8,6 +8,8 @@ import java.net.UnknownHostException;
 
 public class CCPServer extends Thread {
 
+    private final int MESSAGE_SIZE = 512;
+    private int portNumber;
     private DatagramSocket socket;
     private InetSocketAddress socketAddress;
 
@@ -17,11 +19,12 @@ public class CCPServer extends Thread {
     // Create socket address from port number and IP,
     // Create port to listen on socket address,
     // Set message size
-    public CCPServer(int portNumber, String address, int messageSize)
+    public CCPServer(int portNumber, String address)
             throws SocketException, UnknownHostException {
+        this.portNumber = portNumber;
         this.socketAddress = new InetSocketAddress(InetAddress.getByName(address), portNumber);
         this.socket = new DatagramSocket(this.socketAddress);
-        this.buf = new byte[messageSize];
+        this.buf = new byte[MESSAGE_SIZE];
     }
 
     public void run() {
@@ -38,9 +41,13 @@ public class CCPServer extends Thread {
                 String jsonPayload = new String(packet.getData(), 0, packet.getLength());
                 System.out.println("Received JSON: " + jsonPayload);
 
-                // Pass JSON payload to Message Reader
-                MessagePraser.readJsonMessage(jsonPayload);
-
+                if (this.portNumber == 3000) {
+                    JsonReader.readMasterMessage(jsonPayload);
+                } else if (this.portNumber == 4000) {
+                    JsonReader.readArduinoMessage(jsonPayload);
+                } else {
+                    System.out.println("Message from unknown port");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
                 running = false; // Stop Server
@@ -48,4 +55,5 @@ public class CCPServer extends Thread {
         }
         socket.close();
     }
+
 }

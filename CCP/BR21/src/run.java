@@ -15,7 +15,7 @@ public class run {
     }
 
     public void setup() throws SocketException, UnknownHostException {
-        CCPServer a = new CCPServer(4302, "localhost", 1024);
+        CCPServer a = new CCPServer(4302, "localhost");
         a.start();
     }
 

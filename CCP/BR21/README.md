@@ -1,11 +1,9 @@
 ## TODO
 
-Observer pattern
-.properties config
-Message listener to messager sender link up
-Arduino link up
-
-Addings test
+- SystemSetup
+- HealthChecker
+- Arduino Integration
+- Adding test
 
 ## Folder Structure
 

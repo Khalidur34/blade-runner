@@ -1,6 +1,11 @@
-## Getting Started
+## TODO
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Observer pattern
+.properties config
+Message listener to messager sender link up
+Arduino link up
+
+Addings test
 
 ## Folder Structure
 

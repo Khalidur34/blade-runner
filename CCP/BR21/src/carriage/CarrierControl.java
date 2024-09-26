@@ -24,13 +24,14 @@ public class CarrierControl {
         arduinoSender = new UDPSender(Constants.ARDUINO_PORT, Constants.LOCAL_HOST);
         masterSender = new UDPSender(Constants.MCP_PORT, Constants.LOCAL_HOST);
 
-        arduino = new ArduinoHandler(Constants.CCP_PORT1, "localhost", bladerunner);
+        arduino = new ArduinoHandler(Constants.CCP_PORT1, "localhost", bladerunner, masterSender, arduinoSender);
         master = new MasterHandler(Constants.CCP_PORT2, "localhost", bladerunner, masterSender, arduinoSender);
     }
 
     public void run() {
-        // if (SystemSetup.checkPort(Constants.MCP_PORT, Constants.HOST_IP)
-        // && SystemSetup.checkPort(Constants.ARDUINO_PORT, Constants.ARDUINO_IP)) {
+        // if (SystemSetup.checkPortConnection(Constants.MCP_PORT, Constants.HOST_IP)
+        // && SystemSetup.checkPortConnection(Constants.ARDUINO_PORT,
+        // Constants.ARDUINO_IP)) {
         arduino.start();
         master.start();
 

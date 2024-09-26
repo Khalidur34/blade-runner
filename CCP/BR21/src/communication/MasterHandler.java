@@ -6,20 +6,15 @@ import org.json.simple.parser.JSONParser;
 import carriage.CarriageState;
 import utility.JSONBuilder;
 
-import java.io.IOException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
 // HANDLE MESSAGES FROM MASTER
 public class MasterHandler extends UDPHandler {
-    private UDPSender arduinoSender;
-    private UDPSender masterSender;
 
-    public MasterHandler(int port, String addr, CarriageState br, UDPSender masterSender, UDPSender arduinoSender)
+    public MasterHandler(int port, String addr, CarriageState br, UDPSender mSender, UDPSender aSender)
             throws SocketException, UnknownHostException {
-        super(port, addr, br);
-        this.arduinoSender = arduinoSender;
-        this.masterSender = masterSender;
+        super(port, addr, br, mSender, aSender);
     }
 
     public void processMessage(String jsonString) {
@@ -28,7 +23,6 @@ public class MasterHandler extends UDPHandler {
             // parse message and read
             JSONParser parser = new JSONParser();
             JSONObject json = (JSONObject) parser.parse(jsonString);
-
             System.out.println(json.toString());
 
             // build json to send to arduino

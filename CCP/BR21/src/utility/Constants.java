@@ -12,6 +12,8 @@ public class Constants {
     public static final String ARDUINO_IP = "10.20.30.121";
     public static final int ARDUINO_PORT = 7000;
 
+    public static final int MESSAGE_SIZE = 1024;
+
     public static final String CLIENT_ID = "BR21";
 
     // Messages

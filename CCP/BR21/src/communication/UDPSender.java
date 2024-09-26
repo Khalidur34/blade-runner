@@ -7,8 +7,6 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
-import utility.JSONBuilder;
-
 /*
  * Class for sending to a specific port & address
  * Uses MessageBuilder to create a JSON payload and send UDP packet to set destination

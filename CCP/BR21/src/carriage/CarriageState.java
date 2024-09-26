@@ -6,7 +6,7 @@ public class CarriageState {
     boolean doorsOpen;
     String LED;
 
-    String stationID; // keep this null ;// keep this null ;// keep this null ;// keep this null ;
+    String stationID; // keep this null unless stopped at station
     String clientID;
 
     public CarriageState(String id) {
@@ -37,6 +37,7 @@ public class CarriageState {
         state = command;
         speed = 1000;
         LED = "yellow";
+        stationID = null;
     }
 
     public void moveFast(String command) {
@@ -52,10 +53,12 @@ public class CarriageState {
     }
 
     public void openDoor(String command) {
+        state = command;
         doorsOpen = true;
     }
 
     public void closeDoor(String command) {
+        state = command;
         doorsOpen = false;
     }
 

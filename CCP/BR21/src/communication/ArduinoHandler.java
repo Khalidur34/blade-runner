@@ -9,24 +9,24 @@ import carriage.CarriageState;
 
 public class ArduinoHandler extends UDPHandler {
 
-    public ArduinoHandler(int port, String addr, CarriageState br) throws SocketException, UnknownHostException {
-        super(port, addr, br);
+    public ArduinoHandler(int port, String addr, CarriageState br, UDPSender mSender, UDPSender aSender)
+            throws SocketException, UnknownHostException {
+        super(port, addr, br, mSender, aSender);
     }
 
     public void processMessage(String jsonString) {
         try {
             JSONParser parser = new JSONParser();
             JSONObject json = (JSONObject) parser.parse(jsonString);
-            String message = (String) json.get("message");
             System.out.println(json.toString());
+
+            String message = (String) json.get("message");
 
             if (message.equals("ESTOP")) {
                 bladerunner.stop(message);
                 System.out.println("EMERGENCY STOP: SENDING ????");
             } else if (message.equals("STAT")) {
                 System.out.println("STAT Received: SENDING STAT");
-            } else if (message.equals("AKIN")) {
-                System.out.println("CCIN Received: SENDING CCIN");
             } else {
                 System.out.println("Message type unknown");
             }

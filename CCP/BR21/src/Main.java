@@ -11,9 +11,8 @@ public class Main {
             CarrierControl carrierControl = new CarrierControl();
             carrierControl.run();
 
-            System.out.println("!!! SENDING TEST MESSAGE !!!");
-
             Thread.sleep(3000);
+            System.out.println("!!! SENDING TEST MESSAGE !!!");
             UDPSender udpSender = new UDPSender(Constants.CCP_PORT2, Constants.LOCAL_HOST);
             JSONBuilder json = new JSONBuilder();
             json = json.addCommand("OPEN");

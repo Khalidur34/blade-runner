@@ -15,26 +15,26 @@ public class SystemSetup {
 
     private static final int TIMEOUT_MS = 5000;
 
-    public static boolean checkPort(int port, String ip) {
+    public static boolean checkPortConnection(int port, String ip) {
         try (DatagramSocket socket = new DatagramSocket(port)) {
             InetAddress address = InetAddress.getByName(ip);
 
-            // Build JSON CCIN Object
+            // Build JSON CCIN Object and convert to bytes
             JSONBuilder json = new JSONBuilder();
             json = json.addCommand("CCIN");
-
-            // Convert JSON to bytes
             byte[] buffer = json.toString().getBytes();
 
-            // Send packet
+            // Send packet and set timeout
             DatagramPacket packet = new DatagramPacket(buffer, buffer.length, address, port);
             socket.send(packet);
-
             socket.setSoTimeout(TIMEOUT_MS);
-            byte[] receiveData = new byte[1024];
-            DatagramPacket reply = new DatagramPacket(receiveData, receiveData.length);
+
+            // recieve packet
+            buffer = new byte[1024];
+            DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
             socket.receive(reply);
 
+            // extract and check payload
             String replyPayload = new String(reply.getData(), 0, reply.getLength());
             JSONObject replyJSON = JSONReader.getJson(replyPayload);
             String message = (String) replyJSON.get("message");
@@ -42,7 +42,7 @@ public class SystemSetup {
             if (message.equals("AKIN"))
                 return true;
         } catch (SocketTimeoutException e) {
-            System.err.println("Timeout: No packet received on port: " + port);
+            System.err.println("Timeout: No packet received from port: " + port + " at " + ip);
         } catch (IOException e) {
             System.err.println("Error checking port " + port + ": " + e.getMessage());
         }

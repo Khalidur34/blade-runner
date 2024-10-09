@@ -9,19 +9,21 @@ public class run {
     UDPClient client;
     public static void main (String[] args) throws IOException {
         System.out.println("Hello World!");
-
-       run a = new run();
-       a.setup();
-        a.whenCanSendAndReceivePacket_thenCorrect();
+        
+        CCPServer a = new CCPServer(2100,500);
+        a.run();
+        whenCanSendAndReceivePacket_thenCorrect();
+        
+        
     }
 
-    public void setup() throws SocketException, UnknownHostException{
-   //      CCPServer a = new CCPServer(4032,"test",500);
-    //     a.start();
-    }
+    // static public void setup() throws SocketException, UnknownHostException{
+        
+    //     
+    // }
 
    
-    public void whenCanSendAndReceivePacket_thenCorrect() {
+   static public void whenCanSendAndReceivePacket_thenCorrect() {
         SendingData.update("womp",false,0,"BR20","that one");
     }
 }

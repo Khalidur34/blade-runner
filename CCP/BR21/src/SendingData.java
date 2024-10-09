@@ -7,23 +7,25 @@ final public class SendingData implements DataInterface, ObserverInterface {
     
     static public void update(String LED, boolean doorsOpen, int speed, String clientID, String changed){
         JSONObject jsonObject = new JSONObject();
-        if(changed.equals("doorsOpen")){
-            jsonObject.put("Door", doorsOpen);
-            jsonObject.put("LED", LED);
-        }
-        if(changed.equals("speed")){
-            jsonObject.put("Speed", speed);
-            jsonObject.put("LED", LED);    
+        // if(changed.equals("doorsOpen")){
+        //     jsonObject.put("Door", doorsOpen);
+        //     jsonObject.put("LED", LED);
+        // }
+        // if(changed.equals("speed")){
+        //     jsonObject.put("Speed", speed);
+        //     jsonObject.put("LED", LED);    
             
-        }
-
+        // }
+        jsonObject.put("AKIN","test");
         // jsonObject.put("client_type", "CCP");
         // jsonObject.put("message", "CCIN");
         // jsonObject.put("client_id", "BR20");
         // jsonObject.put("sequence_number", "000001");  
         try {
+            
             UDPClient client = new UDPClient();
-            client.send(jsonObject.toString());
+            client.send("t");
+            //client.send(jsonObject.toString());
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -57,7 +59,10 @@ final public class SendingData implements DataInterface, ObserverInterface {
 
         try {
             UDPClient client = new UDPClient();
-            client.send(jsonObject.toString());
+            client.send("AKIN");
+
+      //      client.send(jsonObject.toString());
+            
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

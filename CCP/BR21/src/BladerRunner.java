@@ -13,26 +13,29 @@ public class BladerRunner implements BladerRunnerInterface, SubjectInterface {
         speed = s;
         clientID = c;
     }
-    public void updateDoorsOpen(boolean d){
+
+    public void updateDoorsOpen(boolean d) {
         doorsOpen = d;
         LED = "#a432a8"; // purple
         notifyObservers("doorsOpen");
     }
-    public void updateSpeed(int s){
+
+    public void updateSpeed(int s) {
         speed = s;
-        if(speed > 0)
-            LED = "#b00c0c"; //red
-        else 
+        if (speed > 0)
+            LED = "#b00c0c"; // red
+        else
             LED = "#27b00c"; // green
-        
+
         notifyObservers("speed");
     }
-    public void updateClientID(String c){
+
+    public void updateClientID(String c) {
         clientID = c;
         notifyObservers("clientID");
     }
 
-    public void notifyObservers(String a){
-       SendingData.update(LED, doorsOpen, speed, clientID, a);
+    public void notifyObservers(String a) {
+        SendingData.update(LED, doorsOpen, speed, clientID, a);
     }
 }

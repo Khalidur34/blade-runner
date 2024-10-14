@@ -2,9 +2,9 @@ import java.io.IOException;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import communication.UDPSender;
 import communication.MessageListener;
 import utility.Constants;
-import org.json.simple.JSONObject;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -12,7 +12,11 @@ public class Main {
         BlockingQueue<String> messageQueue = new LinkedBlockingQueue<>(10);
 
         MessageListener messageListener = new MessageListener(Constants.CCP_PORT, Constants.LOCAL_HOST, messageQueue);
-        messageListener.run();
+        Thread listen = new Thread(messageListener);
+        listen.start();
 
+        UDPSender messageSender = new UDPSender(Constants.LOCAL_HOST, Constants.CCP_PORT);
+        System.out.println("SEND");
+        messageSender.sendMessage("Hello World");
     }
 }

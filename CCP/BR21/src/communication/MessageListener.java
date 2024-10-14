@@ -35,13 +35,11 @@ public class MessageListener implements Runnable {
                 byte[] buffer = new byte[Constants.MAX_MESSAGE_SIZE];
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
                 socket.receive(packet);
-                System.out.println("PACKAGE RECIEVED");
 
                 // Extract Payload from packet
                 String payload = new String(packet.getData(), 0, packet.getLength());
-                System.out.println("Payload " + payload);
+                System.out.println(" Package Received -> Payload: " + payload);
                 messageQueue.put(payload);
-                System.out.println(messageQueue.poll());
             }
             socket.close();
         } catch (Exception e) {

@@ -1,37 +1,37 @@
 package communication;
 
-import org.json.simple.JSONObject;
+import com.google.gson.JsonObject;
 
 interface MCPHandler {
-    void handle(JSONObject json);
+    void handle(JsonObject json);
 }
 
 class AKINHandler implements MCPHandler {
     @Override
-    public void handle(JSONObject json) {
+    public void handle(JsonObject json) {
     }
 }
 
 class AKSTHandler implements MCPHandler {
     @Override
-    public void handle(JSONObject json) {
+    public void handle(JsonObject json) {
     }
 }
 
 class STRQHandler implements MCPHandler {
     @Override
-    public void handle(JSONObject json) {
+    public void handle(JsonObject json) {
     }
 }
 
 class EXECHandler implements MCPHandler {
     @Override
-    public void handle(JSONObject json) {
+    public void handle(JsonObject json) {
     }
 }
 
 class NOIPHandler implements MCPHandler {
     @Override
-    public void handle(JSONObject json) {
+    public void handle(JsonObject json) {
     }
 }

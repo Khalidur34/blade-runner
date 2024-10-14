@@ -7,6 +7,9 @@ import java.util.concurrent.BlockingQueue;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import communication.MCPHandler;
 
 public class MessageProcessor implements Runnable {
@@ -57,8 +60,8 @@ public class MessageProcessor implements Runnable {
     public void processMessage(String message) {
         MCPHandler handler;
         if (message.startsWith("{")) {
-            JSONObject json = parseToJSON(message);
-            String messageType = (String) json.get("message");
+            JsonObject json = JsonParser.parseString(message).getAsJsonObject();
+            String messageType = json.get("message").getAsString();
 
             handler = MCPhandlers.get(messageType);
             if (handler == null)

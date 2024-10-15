@@ -7,7 +7,7 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.concurrent.BlockingQueue;
 
-import utility.Constants;
+import configuration.Constants;
 
 public class MessageListener implements Runnable {
     private final String address;
@@ -38,7 +38,7 @@ public class MessageListener implements Runnable {
 
                 // Extract Payload from packet
                 String payload = new String(packet.getData(), 0, packet.getLength());
-                System.out.println(" Package Received -> Payload: " + payload);
+                // System.out.println(" Package Received -> Payload: " + payload);
                 messageQueue.put(payload);
             }
             socket.close();

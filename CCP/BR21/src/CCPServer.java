@@ -30,7 +30,6 @@ public class CCPServer extends Thread {
         while (running) {
             
             try {
-                System.out.println("tt");
                 // Recieve DatagramPacket and extract JSON payload
                 DatagramPacket packet = new DatagramPacket(buf, buf.length);
                 socket.receive(packet);
@@ -40,10 +39,13 @@ public class CCPServer extends Thread {
                 String jsonPayload = new String(packet.getData(), 0, packet.getLength());
                 System.out.println("Received JSON: " + jsonPayload);
 
+
             } catch (IOException e) {
                 e.printStackTrace();
                 running = false; // Stop Server
             }
+
+           // SendingData.update("womp",false,0,"BR20","that one");
         }
         socket.close();
     }

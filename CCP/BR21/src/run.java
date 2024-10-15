@@ -8,10 +8,9 @@ import java.net.UnknownHostException;
 public class run {
     UDPClient client;
     public static void main (String[] args) throws IOException {
-        System.out.println("Hello World!");
         
-        CCPServer a = new CCPServer(2100,500);
-        a.run();
+        CCPServer a = new CCPServer(2000,500);
+        a.start();
         whenCanSendAndReceivePacket_thenCorrect();
         
         

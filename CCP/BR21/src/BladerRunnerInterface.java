@@ -1,3 +1,3 @@
-public abstract interface BladerRunnerInterface {
+public interface BladerRunnerInterface {
 
 }

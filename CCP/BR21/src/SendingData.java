@@ -5,6 +5,7 @@ import org.json.simple.JSONObject; // currently the json simple libary is not wo
 
 final public class SendingData implements DataInterface, ObserverInterface {
     
+//    @SuppressWarnings("unchecked")
     static public void update(String LED, boolean doorsOpen, int speed, String clientID, String changed){
         JSONObject jsonObject = new JSONObject();
         // if(changed.equals("doorsOpen")){
@@ -16,6 +17,32 @@ final public class SendingData implements DataInterface, ObserverInterface {
         //     jsonObject.put("LED", LED);    
             
         // }
+
+        // all with the master 
+        // for connection / Awk (replace CCIN with AKEX)
+        jsonObject.put("client_type", "CCP");
+        jsonObject.put("message", "CCIN");
+        jsonObject.put("client_id", "BRXX");
+        jsonObject.put("sequence_number", "s_ccp");
+      
+        //for status
+        jsonObject.put("client_type", "CCP");
+        jsonObject.put("message", "STAT");
+        jsonObject.put("client_id", "BRXX");
+        jsonObject.put("sequence_number", "s_ccp");
+        jsonObject.put("status","---------------------------------------------");
+        //STOPC, STOPO, FSLOWC, FFASTC, RSLOWC, ERR, OFLN
+
+        //
+        jsonObject.put("", "");
+        jsonObject.put("", "");
+        jsonObject.put("", "");
+        jsonObject.put("", "");
+      
+        
+
+
+
         jsonObject.put("AKIN","test");
         // jsonObject.put("client_type", "CCP");
         // jsonObject.put("message", "CCIN");
@@ -24,7 +51,7 @@ final public class SendingData implements DataInterface, ObserverInterface {
         try {
             
             UDPClient client = new UDPClient();
-            client.send("t");
+            client.send("THE ROOOOOOOOOOKIE FR A FIRE SHOW CUZ");
             //client.send(jsonObject.toString());
         } catch (IOException e) {
             // TODO Auto-generated catch block

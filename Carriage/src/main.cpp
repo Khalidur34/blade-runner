@@ -13,9 +13,9 @@ char incomingPacket[255];  // Buffer for incoming packet
 String status = "STOPC";
 
 //motor pins
-const int PWMA = 14;
-const int AIN1 = 27;
-const int AIN2 = 26;
+const int PWMA = 10;
+const int AIN1 = 35;
+const int AIN2 = 34;
 
 //sensor pins
 const int TRIG = 27;

@@ -1,8 +1,0 @@
-{
-  "java.project.sourcePaths": [
-    "CCP/BR21/src"
-  ],
-  "java.project.referencedLibraries": [
-    "CCP\\BR21\\libs\\json-simple-1.1.1.jar"
-  ]
-}

@@ -2,17 +2,25 @@ import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 
 
 public class run {
-    UDPClient client;
+    
     public static void main (String[] args) throws IOException {
-        
-        CCPServer a = new CCPServer(2000,500);
+        ArrayList<String> messages = new ArrayList<String>();
+        CCPServer a = new CCPServer(2000,500,messages);
         a.start();
         whenCanSendAndReceivePacket_thenCorrect();
         
+        while (true){
+            if(messages.size() != 0){
+                
+            }
+
+        }
+
         
     }
 

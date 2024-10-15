@@ -5,6 +5,7 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 public class CCPServer extends Thread {
 
@@ -14,7 +15,7 @@ public class CCPServer extends Thread {
     private byte[] buf;
     private boolean running;
 
-    public CCPServer(int portNumber,  int messageSize)
+    public CCPServer(int portNumber,  int messageSize, ArrayList<String> message)
             throws SocketException, UnknownHostException {
         // Create socket address from port number and IP,
         // Create port to listen on socket address,
@@ -28,25 +29,22 @@ public class CCPServer extends Thread {
         running = true;
         System.out.println("SERVER STARTED");
         while (running) {
-            
-            try {
-                // Recieve DatagramPacket and extract JSON payload
-                DatagramPacket packet = new DatagramPacket(buf, buf.length);
-                socket.receive(packet);
-                System.out.println("PACKAGE RECIEVED");
+            System.out.println("runs listener thread");
+            // try {
+            //     DatagramPacket packet = new DatagramPacket(buf, buf.length);
+            //     socket.receive(packet);
+            //     System.out.println("PACKAGE RECIEVED");
 
-                // Extract Payload from packet
-                String jsonPayload = new String(packet.getData(), 0, packet.getLength());
-                System.out.println("Received JSON: " + jsonPayload);
+            //     String jsonPayload = new String(packet.getData(), 0, packet.getLength());
+            //     System.out.println("Received JSON: " + jsonPayload);
 
 
-            } catch (IOException e) {
-                e.printStackTrace();
-                running = false; // Stop Server
-            }
+            // } catch (IOException e) {
+            //     e.printStackTrace();
+            //     running = false;
+            // }
 
-           // SendingData.update("womp",false,0,"BR20","that one");
         }
-        socket.close();
+        // socket.close();
     }
 }

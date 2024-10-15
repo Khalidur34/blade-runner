@@ -14,8 +14,6 @@ public class run {
         a.start();
         while (true){
             if(a.messageList.size() != 0){
-                
-                
                 IncomingData.sortMessage(a.messageList);
                 a.messageList.remove(0);
             } 

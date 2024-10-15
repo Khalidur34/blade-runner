@@ -18,10 +18,6 @@ public class CCPServer extends Thread {
 
     public CCPServer(int portNumber,  int messageSize)
             throws SocketException, UnknownHostException {
-        // Create socket address from port number and IP,
-        // Create port to listen on socket address,
-        // Set message size
-        // this.socketAddress = new InetSocketAddress(InetAddress.getByName(address), portNumber);
         messageList = new ArrayList<String>();
          this.socket = new DatagramSocket(portNumber);
          this.buf = new byte[messageSize];
@@ -39,18 +35,11 @@ public class CCPServer extends Thread {
 
                 String message = new String(packet.getData(), 0, packet.getLength());
                 messageList.add(message);
-               // Thread.sleep(1000);
-                
-
 
             } catch (IOException e) {
                 e.printStackTrace();
                 running = false;
              } 
-             //catch (InterruptedException e) {
-            //     // TODO Auto-generated catch block
-            //     e.printStackTrace();
-            // }
 
         }
         // socket.close();

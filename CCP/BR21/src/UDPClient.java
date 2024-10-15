@@ -5,25 +5,26 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
-public class UDPClient {
+final public class UDPClient {
    
-    private InetAddress addr;
-    private DatagramSocket sock;
+    // private InetAddress addr;
+    // private  sock;
     
 
-    public UDPClient() throws SocketException, UnknownHostException {
-        sock = new DatagramSocket();
-        addr = InetAddress.getByName("10.126.251.161");
-    }
+    // public UDPClient() throws SocketException, UnknownHostException {
+        
+    // }
 
-    public void send(String msg) throws IOException {
+    static public void send(String msg) throws IOException {
+        DatagramSocket sock = new DatagramSocket();
+        InetAddress addr = InetAddress.getByName("172.17.16.1");
         byte[] byt = msg.getBytes();
         DatagramPacket packet = new DatagramPacket(byt, byt.length, addr, 2200);
         System.out.println("test");
         sock.send(packet);
     }
 
-    public void close() {
-        sock.close();
-    }
+    // public void close() { 
+    //     sock.close();
+    // }
 }

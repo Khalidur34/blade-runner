@@ -8,29 +8,19 @@ import java.util.ArrayList;
 
 public class run {
     
-    public static void main (String[] args) throws IOException {
-        ArrayList<String> messages = new ArrayList<String>();
-        CCPServer a = new CCPServer(2000,500,messages);
-        a.start();
-        whenCanSendAndReceivePacket_thenCorrect();
+    public  static void main (String[] args) throws IOException{
         
+        CCPServer a = new CCPServer(2000,500);
+        a.start();
         while (true){
-            if(messages.size() != 0){
+            if(a.messageList.size() != 0){
                 
-            }
-
+                
+                IncomingData.sortMessage(a.messageList);
+                a.messageList.remove(0);
+            } 
         }
 
         
-    }
-
-    // static public void setup() throws SocketException, UnknownHostException{
-        
-    //     
-    // }
-
-   
-   static public void whenCanSendAndReceivePacket_thenCorrect() {
-        SendingData.update("womp",false,0,"BR20","that one");
     }
 }

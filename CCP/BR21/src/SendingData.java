@@ -16,7 +16,7 @@ final public class SendingData implements DataInterface, ObserverInterface {
         // jsonObject.put("LED", LED);
 
         // }
-        jsonObject.put("AKIN","test");
+        jsonObject.put("AKIN","test"); 
         // jsonObject.put("client_type", "CCP");
         // jsonObject.put("message", "CCIN");
         // jsonObject.put("client_id", "BR20");
@@ -29,6 +29,12 @@ final public class SendingData implements DataInterface, ObserverInterface {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        }
+    }
+
+    static public void dSend(String s) throws IOException{
+        if (s.equals("stat")){
+            UDPClient.send("test");
         }
     }
 

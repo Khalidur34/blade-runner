@@ -28,7 +28,7 @@ public class BladerRunner implements BladerRunnerInterface, SubjectInterface {
             LED = "#27b00c"; // green
 
         notifyObservers("speed");
-    }
+    } 
 
     public void updateClientID(String c) {
         clientID = c;

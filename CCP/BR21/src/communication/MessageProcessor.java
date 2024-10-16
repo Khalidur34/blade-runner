@@ -24,6 +24,7 @@ public class MessageProcessor implements Runnable {
         this.MCPhandlers = new HashMap<>();
         this.BRhandlers = new HashMap<>();
         initializeHandlers();
+        scheduleChecks();
     }
 
     private void scheduleChecks() {

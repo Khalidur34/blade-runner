@@ -3,10 +3,6 @@
 #include <WebServer.h>
 
 WiFiUDP udp;
-WiFiManager wifiManager;
-PacketManager packetManager;
-CommandManager commandManager;
-
 const char* ssid = "ENGG2K3K";
 unsigned int localUdpPort = 3020;  // Port used for communication
 char incomingPacket[255];  // Buffer for incoming packet
@@ -71,37 +67,49 @@ class PacketManager {
 
 };
 
-class CommandManager {
-  Command command;
-  
+class MiscManager {
   public:
-
-  String manage(String task) {
-    if(task == "STRQ") {
-      return status;
+  void doorControl(boolean status) {
+    if(status == true) {
+      Serial.printf("Door open");
     }
-    else if(task == "EXEC:STOPC") { //BR stopped and the door is closed
-      status = "STAT:STOPC";
-      return command.execStopc();
-    }
-    else if(task == "EXEC:STOPO") { //BR stopped and the door is opened
-      status = "STAT:STOPO";
-      return command.execStopo();
-    }
-    else if(task == "EXEC:FSLOWC") { //BR moving in forward direction slowly and the door is closed.
-      status = "STAT:FSLOWC";
-      return command.execFSlowc();
-    }
-    else if(task == "EXEC:FFASTC") { //BR moving in forward direction at fast speed and the door is closed
-      status = "STAT:FFASTC";
-      return command.execFFastc();
-    }
-    else if(task == "EXEC:RSLOWC") { //BR moving slowly in reverse direction and the door is closed.
-      status = "STAT:RSLOWC"; 
-      return command.execRSlowc();
+    else{
+      Serial.printf("Door closed");
     }
   }
-  
+  void ledControl(boolean status, int color) {
+
+  }
+  bool sensorStatus() {
+    int sensorValue = analogRead(PHT);
+    Serial.printf("Phototransistor reading: %d\n", sensorValue);
+    return sensorValue > 250;
+  }
+
+};
+
+class MotionManager {
+
+  public:
+
+  void forward(int speed) {
+    digitalWrite(AIN1, HIGH);   // Motor forward
+    digitalWrite(AIN2, LOW);
+    analogWrite(PWMA, speed);     // PWM for x% speed
+  }
+
+  void backward(int speed) {
+    digitalWrite(AIN1, LOW);    // Motor backward
+    digitalWrite(AIN2, HIGH);
+    analogWrite(PWMA, speed);     // PWM for x% speed
+  }
+
+  void stop() {
+    digitalWrite(AIN1, LOW);    // Stop the motor
+    digitalWrite(AIN2, LOW);
+    analogWrite(PWMA, 0);       // Speed 0
+  }
+
 };
 
 class Command {
@@ -145,50 +153,43 @@ class Command {
   }  
 };
 
-class MotionManager {
-
+class CommandManager {
+  Command command;
+  
   public:
 
-  void forward(int speed) {
-    digitalWrite(AIN1, HIGH);   // Motor forward
-    digitalWrite(AIN2, LOW);
-    analogWrite(PWMA, speed);     // PWM for x% speed
-  }
-
-  void backward(int speed) {
-    digitalWrite(AIN1, LOW);    // Motor backward
-    digitalWrite(AIN2, HIGH);
-    analogWrite(PWMA, speed);     // PWM for x% speed
-  }
-
-  void stop() {
-    digitalWrite(AIN1, LOW);    // Stop the motor
-    digitalWrite(AIN2, LOW);
-    analogWrite(PWMA, 0);       // Speed 0
-  }
-
-};
-
-class MiscManager {
-  public:
-  void doorControl(boolean status) {
-    if(status == true) {
-      Serial.printf("Door open");
+  String manage(String task) {
+    if(task == "STRQ") {
+      return status;
     }
-    else{
-      Serial.printf("Door closed");
+    else if(task == "EXEC:STOPC") { //BR stopped and the door is closed
+      status = "STAT:STOPC";
+      return command.execStopc();
+    }
+    else if(task == "EXEC:STOPO") { //BR stopped and the door is opened
+      status = "STAT:STOPO";
+      return command.execStopo();
+    }
+    else if(task == "EXEC:FSLOWC") { //BR moving in forward direction slowly and the door is closed.
+      status = "STAT:FSLOWC";
+      return command.execFSlowc();
+    }
+    else if(task == "EXEC:FFASTC") { //BR moving in forward direction at fast speed and the door is closed
+      status = "STAT:FFASTC";
+      return command.execFFastc();
+    }
+    else if(task == "EXEC:RSLOWC") { //BR moving slowly in reverse direction and the door is closed.
+      status = "STAT:RSLOWC"; 
+      return command.execRSlowc();
     }
   }
-  void ledControl(boolean status, int color) {
-
-  }
-  bool sensorStatus() {
-    int sensorValue = analogRead(PHT);
-    Serial.printf("Phototransistor reading: %d\n", sensorValue);
-    return sensorValue > 250;
-  }
-
+  
 };
+
+
+WiFiManager wifiManager;
+PacketManager packetManager;
+CommandManager commandManager;
 
 void setup() {
   Serial.begin(115200);

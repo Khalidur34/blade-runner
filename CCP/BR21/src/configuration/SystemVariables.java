@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class SystemVariables {
+
     // Thread-safe HashMap to store string-integer mappings
     private static final ConcurrentHashMap<String, Integer> expectedMessages = new ConcurrentHashMap<>();
 

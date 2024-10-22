@@ -24,7 +24,6 @@ public class MessageProcessor implements Runnable {
         this.MCPhandlers = new HashMap<>();
         this.BRhandlers = new HashMap<>();
         initializeHandlers();
-        scheduleChecks();
     }
 
     private void scheduleChecks() {
@@ -35,8 +34,7 @@ public class MessageProcessor implements Runnable {
             int retries = SystemVariables.getVariable("STAT");
             if (retries <= 3) {
 
-                UDPSender udpSender = new UDPSender(Constants.BR_IP, Constants.BR_PORT);
-                udpSender.sendMessage("STRQ");
+                UDPSender.sendMessage(Constants.BR_IP, Constants.BR_PORT, "STRQ");
 
                 SystemVariables.setVariable("STAT", retries + 1);
                 System.out.println("Increment Retries");
@@ -53,6 +51,7 @@ public class MessageProcessor implements Runnable {
             if (SystemVariables.isMcpOnline()) {
                 SystemVariables.setMcpOnline(false);
             } else {
+
                 System.out.println("Scheduled check: MCP IS OFFLINE.");
 
             }

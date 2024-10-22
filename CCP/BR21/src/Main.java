@@ -1,11 +1,10 @@
+import communication.MessageListener;
+import communication.MessageProcessor;
+import communication.UDPSender;
+import configuration.Constants;
 import java.io.IOException;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-
-import communication.UDPSender;
-import configuration.Constants;
-import communication.MessageListener;
-import communication.MessageProcessor;
 
 public class Main {
 

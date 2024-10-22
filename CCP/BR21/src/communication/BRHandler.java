@@ -37,8 +37,7 @@ class UPDTHandler implements BRHandler {
         newMsg.addProperty("message", "STAT");
         newMsg.addProperty("status", SystemVariables.getCarriageState());
 
-        UDPSender udpSender = new UDPSender(Constants.HOST_IP, Constants.MCP_PORT);
-        udpSender.sendMessage(newMsg.toString());
+        UDPSender.sendMessage(Constants.HOST_IP, Constants.MCP_PORT, newMsg.toString());
         System.out.println(newMsg.toString());
 
         SystemVariables.setVariable("AKST", 0);

@@ -9,6 +9,9 @@ void MotionManager::setup(int pwmaPin, int ain1Pin, int ain2Pin) {
     pinMode(PWMA, OUTPUT);
     pinMode(AIN1, OUTPUT);
     pinMode(AIN2, OUTPUT);
+
+    digitalWrite(AIN1, LOW);
+    digitalWrite(AIN2, LOW);
 }
 
 void MotionManager::forward(int speed) {

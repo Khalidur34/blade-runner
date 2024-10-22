@@ -11,6 +11,8 @@ class Command {
         String execFSlowc();
         String execFFastc();
         String execRSlowc();
+    private:
+        MotionManager motionManager;
 };
 
 #endif

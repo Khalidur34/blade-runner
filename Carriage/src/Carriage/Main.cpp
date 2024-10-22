@@ -10,14 +10,14 @@ unsigned int remotePort = 3020; //Port of CPP
 unsigned int localPort = 5000; //ESP32 will be listening to this port
 
 //motor pins
-const int PWMA = 10;
-const int AIN1 = 35;
-const int AIN2 = 34;
+int PWMA = 14;
+int AIN1 = 27;
+int AIN2 = 26;
 
 //sensor pins
-const int TRIG = 27;
-const int ECHO = 28;
-const int PHT = 7;
+//const int TRIG = 27;
+//const int ECHO = 28;
+//const int PHT = 7;
 
 //led pins
 const int DIN = 29;
@@ -29,11 +29,13 @@ CommandManager commandManager;
 
 void setup() {
     Serial.begin(115200);
-    wifiManager.connect(ssid, "no_password");
-    packetManager.setup(remoteIP, remotePort, localPort);
+    //wifiManager.connect(ssid, "no_password");
+    //packetManager.setup(remoteIP, remotePort, localPort);
     motionManager.setup(PWMA, AIN1, AIN2);
-    packetManager.begin();
-    packetManager.init();
+    //packetManager.begin();
+    //packetManager.init();
+    String command = commandManager.manage("EXEC:STOPC");
+    Serial.println(command);
 }
 
 void loop() {

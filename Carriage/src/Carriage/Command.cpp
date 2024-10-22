@@ -1,6 +1,7 @@
 #include "Command.h"
 
 String Command::execStopc() {
+    motionManager.stop();
     return "AK:STOPC";
 }
 

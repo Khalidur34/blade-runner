@@ -6,10 +6,12 @@
 class CommandManager {
     public:
         String manage(String task);
+        String getStatus();
 
     private:
-        String status;
         Command command;
+        String status;
+        
 };
 
 #endif

@@ -5,6 +5,7 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 public class CCPServer extends Thread {
 
@@ -13,38 +14,34 @@ public class CCPServer extends Thread {
 
     private byte[] buf;
     private boolean running;
+    public volatile ArrayList<String> messageList;
 
     public CCPServer(int portNumber,  int messageSize)
             throws SocketException, UnknownHostException {
-        // Create socket address from port number and IP,
-        // Create port to listen on socket address,
-        // Set message size
-        // this.socketAddress = new InetSocketAddress(InetAddress.getByName(address), portNumber);
+        messageList = new ArrayList<String>();
          this.socket = new DatagramSocket(portNumber);
          this.buf = new byte[messageSize];
-    }
+    } 
 
-    public void run() {
+    public  void run() {
         running = true;
         System.out.println("SERVER STARTED");
         while (running) {
-            
+            System.out.println("runs listener thread");
             try {
-                System.out.println("tt");
-                // Recieve DatagramPacket and extract JSON payload
                 DatagramPacket packet = new DatagramPacket(buf, buf.length);
                 socket.receive(packet);
                 System.out.println("PACKAGE RECIEVED");
 
-                // Extract Payload from packet
-                String jsonPayload = new String(packet.getData(), 0, packet.getLength());
-                System.out.println("Received JSON: " + jsonPayload);
+                String message = new String(packet.getData(), 0, packet.getLength());
+                messageList.add(message);
 
             } catch (IOException e) {
                 e.printStackTrace();
-                running = false; // Stop Server
-            }
+                running = false;
+             } 
+
         }
-        socket.close();
+        // socket.close();
     }
 }

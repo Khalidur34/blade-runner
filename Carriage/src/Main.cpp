@@ -34,7 +34,11 @@ void setup() {
     motionManager.setup(PWMA, AIN1, AIN2);
     //packetManager.begin();
     //packetManager.init();
-    String command = commandManager.manage("EXEC:STOPC");
+    String command = commandManager.manage("EXEC:FSLOWC");
+    Serial.println(command);
+    command = commandManager.manage("EXEC:FFASTC");
+    Serial.println(command);
+    command = commandManager.manage("EXEC:RSLOWC");
     Serial.println(command);
 }
 

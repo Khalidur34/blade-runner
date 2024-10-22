@@ -1,8 +1,10 @@
 #include "CommandManager.h"
 
+//this class is for managing all commands
+
 String CommandManager::manage(String task) {
     if(task == "STRQ") {
-        return status;
+        return getStatus();
     }
     else if(task == "EXEC:STOPC") { //BR stopped and the door is closed
         status = "STAT:STOPC";
@@ -24,6 +26,7 @@ String CommandManager::manage(String task) {
         status = "STAT:RSLOWC"; 
         return command.execRSlowc();
     }
+    return getStatus();
     
 }
 String CommandManager::getStatus() {

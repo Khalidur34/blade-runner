@@ -1,5 +1,7 @@
 #include "PacketManager.h"
 
+//this class is for exchanging commands
+
 void PacketManager::setup(String remoteIP, unsigned int remotePort, unsigned int localPort) {
     IPAddress ip;
     ip.fromString(remoteIP);
@@ -14,13 +16,13 @@ void PacketManager::begin() {
 }
 
 void PacketManager::init() {
-    sendPacket("CCIN"); //send init message
+    sendPacket("BRIN"); //send init message
     String command;
-    Serial.printf("waiting for CCIN");
-    while(command != "AKIN") { //will wait indefinitely until AKIN in received
+    Serial.printf("waiting for BRIN");
+    while(command != "CCIN") { //will wait indefinitely until AKIN in received
         command = receivePacket();
     }
-    Serial.printf("CCIN received");
+    Serial.printf("BRIN received");
     Serial.printf("init complete");
 }
 

@@ -1,6 +1,8 @@
 #include "MotionManager.h"
 #include <Arduino.h>
 
+//this class is for motor setup and motor control
+
 void MotionManager::setup(int pwmaPin, int ain1Pin, int ain2Pin) {
     PWMA = pwmaPin;
     AIN1 = ain1Pin;

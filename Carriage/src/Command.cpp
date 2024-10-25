@@ -1,35 +1,34 @@
 #include "Command.h"
 
-//this class contains the execution logic for each and every command
+// this class contains the execution logic for each command
+// commands execute required actions and return the reply message
 
 String Command::execStopc() {
     motionManager.stop();
+    ledControl.changeColor("#FF0000");
     return "AK:STOPC";
 }
 
 String Command::execStopo() {
     motionManager.stop();
+    ledControl.changeColor("#FFA500");
     return "AK:STOPO";
 }
 
-String Command::execFSlowc() {
-    for(int i = 0 ; i < 150; i = i + 10) {
-        motionManager.forward(i);
-    }
-    return "AK:FSLOWC";
-}
-
 String Command::execFFastc() {
-    for(int i = 0 ; i < 200; i = i + 50) {
-        motionManager.forward(i);
-    }
-
+    motionManager.forward(200);
+    ledControl.changeColor("#00FF00");
     return "AK:FFASTC";
 }
 
+String Command::execFSlowc() {
+    motionManager.forward(100);
+    ledControl.changeColor("#FFFF00");
+    return "AK:FSLOWC";
+}
+
 String Command::execRSlowc() {
-    for(int i = 0 ; i < 150; i = i + 50) {
-        motionManager.forward(i);
-    }
+    motionManager.backward(100);
+    ledControl.changeColor("#0000FF");
     return "AK:RSLOWC";
 }

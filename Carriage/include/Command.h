@@ -2,7 +2,7 @@
 #define COMMAND_H
 #include <Arduino.h>
 #include "MotionManager.h"
-//#include "MiscManager.h"
+#include "LedControl.h"
 
 class Command {
     public:
@@ -13,6 +13,7 @@ class Command {
         String execRSlowc();
     private:
         MotionManager motionManager;
+        LedControl ledControl;
 };
 
 #endif

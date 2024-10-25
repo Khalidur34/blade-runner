@@ -10,7 +10,6 @@
 Adafruit_NeoPixel strip(NUM_PIXELS, LED_PIN, NEO_GRB + NEO_KHZ800);
 
 void LedControl::setup() {
-    // Initialize NeoPixel strip
     strip.begin();
     strip.show(); // Initialize all pixels to 'off'
 }

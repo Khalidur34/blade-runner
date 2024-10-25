@@ -12,6 +12,5 @@ void WiFiManager::connect(const char* ssid, const char* password) {
     }
     
     Serial.println("Connected to WiFi");
-    Serial.print("ESP32 IP: ");
-    Serial.println(WiFi.localIP());   
+    Serial.println("ESP32 IP: " + WiFi.localIP().toString());
 }

@@ -7,6 +7,7 @@ class MotionManager {
     void forward(int speed);
     void backward(int speed);
     void stop();
+    void testMotor();
 
   private:
     int PWMA, AIN1, AIN2;  // Motor pins

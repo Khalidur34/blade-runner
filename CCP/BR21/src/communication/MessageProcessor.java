@@ -59,7 +59,6 @@ public class MessageProcessor implements Runnable {
     }
 
     public void initializeHandlers() {
-        this.MCPhandlers.put("CCIN", new AKINHandler());
         this.MCPhandlers.put("AKST", new AKSTHandler());
         this.MCPhandlers.put("STRQ", new STRQHandler());
         this.MCPhandlers.put("EXEC", new EXECHandler());

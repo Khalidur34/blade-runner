@@ -1,4 +1,5 @@
 #include <Adafruit_NeoPixel.h>
+#include "LedControl.h"
 
 // Pin where NeoPixel is connected
 #define LED_PIN 5 // Use the GPIO pin you've wired to DIN of NeoPixel
@@ -6,18 +7,15 @@
 // Number of NeoPixels
 #define NUM_PIXELS 8 // Adjust for the number of pixels on your stick
 
-// Create the NeoPixel object
 Adafruit_NeoPixel strip(NUM_PIXELS, LED_PIN, NEO_GRB + NEO_KHZ800);
 
-void setup()
-{
+void LedControl::setup() {
     // Initialize NeoPixel strip
     strip.begin();
     strip.show(); // Initialize all pixels to 'off'
 }
 
-uint32_t hexToColor(const char *hex)
-{
+uint32_t LedControl::hexToColor(const char *hex){
     long number = strtol(hex + 1, NULL, 16); // Convert hex to long
     uint8_t r = (number >> 16) & 0xFF;       // Extract red component
     uint8_t g = (number >> 8) & 0xFF;        // Extract green component
@@ -26,26 +24,25 @@ uint32_t hexToColor(const char *hex)
 }
 
 // Fill the strip with a color, one pixel at a time
-void changeColor(char *hex)
-{
+void LedControl::changeColor(char *hex){
+    uint32_t color = hexToColor(hex);
     for (int i = 0; i < strip.numPixels(); i++)
     {
-        strip.setPixelColor(i, hexToColor(hex));
+        strip.setPixelColor(i, color);
         strip.show();
     }
 }
 
-// Display a rainbow pattern
-void rainbow(int wait)
-{
-    for (long firstPixelHue = 0; firstPixelHue < 5 * 65536; firstPixelHue += 256)
-    {
-        for (int i = 0; i < strip.numPixels(); i++)
-        {
-            int pixelHue = firstPixelHue + (i * 65536L / strip.numPixels());
-            strip.setPixelColor(i, strip.gamma32(strip.ColorHSV(pixelHue)));
-        }
-        strip.show();
-        delay(wait);
-    }
+void LedControl::turnOff() {
+    changeColor("#000000");
+}
+
+void LedControl::testLed() {
+    changeColor("#FF0000"); 
+    delay(2000);           
+    changeColor("#00FF00"); 
+    delay(2000);           
+    changeColor("#0000FF"); 
+    delay(2000);   
+    turnOff();
 }

@@ -25,11 +25,13 @@ public class Setup {
             DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 
             try {
+                // receive the packet
                 socket.receive(packet);
                 String payload = new String(packet.getData(), 0, packet.getLength());
+                System.out.println("Message Received: " + payload);
+                
                 String[] messageParts = payload.split(":");
                 if (messageParts[0].equals("BRIN")) {
-                    System.out.println("Message Received: " + payload);
                     UDPSender.sendMessage(Constants.BR_IP, Constants.BR_PORT, "AK:BRIN");
                     return true;
                 }

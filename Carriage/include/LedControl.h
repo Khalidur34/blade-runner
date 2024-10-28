@@ -5,11 +5,7 @@
 class LedControl {
 public:
     void setup();
-    void changeColor(char *hex);
+    void setColor(int red, int green, int blue);
     void testLed();
-    void turnOff();
-
-private:
-    uint32_t hexToColor(const char *hex);
 };
 #endif

@@ -1,5 +1,6 @@
 #include "Command.h"
-
+#define Threshold_Value
+#define min_Distance
 // this class contains the execution logic for each command
 // commands execute required actions and return the reply message
 
@@ -40,3 +41,12 @@ String Command::execRSlowc() {
     ledControl.setColor(0, 0, 255);
     return "AK:RSLOWC";
 }
+
+// Add sensor functions to check if triggered
+// bool Command::isPhototransistorTriggered() {
+//     return photoTransistor.read() > Threshold_Value;
+// }
+
+// bool Command::isUltrasonicTriggered() {
+//     return ultrasonic.getDistance() < min_Distance;
+// }

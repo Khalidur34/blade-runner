@@ -1,8 +1,6 @@
 #ifndef LedControl_H
 #define LedControl_H
 #include <Arduino.h>
-#include "PhotoTransistor.h"
-#include "UltrasonicSensor.h"
 
 class LedControl {
 public:
@@ -12,7 +10,6 @@ public:
     void checkSensors();
 
 private:
-    PhotoTransistor photoTransistor;
-    Ultrasonic ultrasonicSensor;     
+    
 };
 #endif

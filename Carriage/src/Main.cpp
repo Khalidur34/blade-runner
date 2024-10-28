@@ -27,7 +27,6 @@ int AIN2 = 26;
 WiFiManager wifiManager;
 PacketManager packetManager;
 CommandManager commandManager;
-PhotoTransistor photoTransistor;
 MotionManager motionManager;
 LedControl ledControl;
 

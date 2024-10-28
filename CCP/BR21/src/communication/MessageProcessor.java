@@ -51,9 +51,8 @@ public class MessageProcessor implements Runnable {
             if (SystemVariables.isMcpOnline()) {
                 SystemVariables.setMcpOnline(false);
             } else {
-
+                UDPSender.sendMessage(Constants.BR_IP, Constants.BR_PORT, "EXEC:STOPC");
                 System.out.println("Scheduled check: MCP IS OFFLINE.");
-
             }
         }, 0, 6, TimeUnit.SECONDS);
     }

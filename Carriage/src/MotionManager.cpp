@@ -7,6 +7,7 @@ void MotionManager::setup(int pwmaPin, int ain1Pin, int ain2Pin) {
     PWMA = pwmaPin;
     AIN1 = ain1Pin;
     AIN2 = ain2Pin;
+    vel = 0;
 
     pinMode(PWMA, OUTPUT);
     pinMode(AIN1, OUTPUT);
@@ -14,26 +15,47 @@ void MotionManager::setup(int pwmaPin, int ain1Pin, int ain2Pin) {
 
     digitalWrite(AIN1, LOW);
     digitalWrite(AIN2, LOW);
-
-    ledcAttachPin(PWMA, 0);  // Attach `enA` pin to PWM channel 0
-    ledcSetup(0, 5000, 8);
 }
 
 void MotionManager::forward(int speed) {
-    Serial.println("I am here");
     digitalWrite(AIN1, HIGH);   // Motor forward
     digitalWrite(AIN2, LOW);
-    ledcWrite(0, speed);    // PWM for x% speed
+    while(vel < speed) {
+        currSpeed(vel);
+        vel++;
+    }
 }
 
 void MotionManager::backward(int speed) {
     digitalWrite(AIN1, LOW);    // Motor backward
     digitalWrite(AIN2, HIGH);
-    ledcWrite(0, speed);    // PWM for x% speed
+    while(vel < speed) {
+        currSpeed(vel);
+        vel++;
+    }
 }
 
 void MotionManager::stop() {
+    for(int i = vel; i >= 0 ; i-= 50) {
+        currSpeed(i);
+        vel = i;
+    }
     digitalWrite(AIN1, LOW);    // Stop the motor
-    digitalWrite(AIN2, LOW);
-    ledcWrite(0, 0);        // Speed 0
+    digitalWrite(AIN2, LOW);  
+    unsigned long stopTime = millis();
+    while(millis() - stopTime < 2000);  
+}
+
+void MotionManager::currSpeed(int speed) {
+    analogWrite(PWMA, speed);
+    delay(1);
+}
+
+void MotionManager::testMotor() {
+    // forward();
+    // delay(2000);
+    // stop();
+    // backward();
+    // delay(2000);
+    // stop();
 }

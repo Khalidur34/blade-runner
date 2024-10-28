@@ -15,6 +15,7 @@ void PacketManager::begin() {
     Serial.println("ready to send and receive commands");
 }
 
+// IMPROVEMENT: SET WAIT TIME FOR AKIN?
 void PacketManager::init() {
     sendPacket("BRIN"); //send init message
     String command;

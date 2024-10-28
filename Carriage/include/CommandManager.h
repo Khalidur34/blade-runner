@@ -7,6 +7,7 @@ class CommandManager {
     public:
         String manage(String task);
         String getStatus();
+        String changeStatus();
 
     private:
         Command command;

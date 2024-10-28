@@ -11,9 +11,9 @@ import communication.Setup;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        System.out.println("!!!Program Started!!!");
-        if (!Setup.setupBR() || !Setup.setupMCP())
-            return;
+        // System.out.println("!!!Program Started!!!");
+        // if (!Setup.setupBR() || !Setup.setupMCP())
+        // return;
         BlockingQueue<String> messageQueue = new LinkedBlockingQueue<>(10);
 
         MessageListener messageListener = new MessageListener(Constants.CCP_PORT, Constants.LOCAL_HOST, messageQueue);

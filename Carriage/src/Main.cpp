@@ -26,7 +26,7 @@ const int DIN = 29;
 WiFiManager wifiManager;
 PacketManager packetManager;
 CommandManager commandManager;
-
+PhotoTransistor photoTransistor;
 MotionManager motionManager;
 LedControl ledControl;
 
@@ -43,6 +43,7 @@ void setup() {
 }
 
 void loop() {
+    ledControl.checkSensors(); 
     String packet = packetManager.receivePacket();
     if(!packet.isEmpty()) {
         String messageForCCP = commandManager.manage(packet);

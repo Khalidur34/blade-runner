@@ -30,3 +30,13 @@ void LedControl::testLed() {
   setColor(0, 0, 255);  // Blue
   delay(1000);
 }
+
+void LedControl::checkSensors() {
+    if (_photoTransistor->isTriggered()) {
+        setColor(255, 0, 0); 
+    } else if (_ultrasonicSensor->isTriggered()) {
+        setColor(0, 0, 255);  
+    } else {
+        setColor(0, 255, 0);
+    }
+}

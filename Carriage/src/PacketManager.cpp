@@ -12,23 +12,24 @@ void PacketManager::setup(String remoteIP, unsigned int remotePort, unsigned int
 
 void PacketManager::begin() {
     udp.begin(localPort);
-    Serial.printf("ready to send and receive commands");
+    Serial.println("ready to send and receive commands");
 }
 
 void PacketManager::init() {
     sendPacket("BRIN"); //send init message
     String command;
-    Serial.printf("waiting for BRIN");
+    Serial.println("waiting for BRIN");
     while(command != "CCIN") { //will wait indefinitely until AKIN in received
         command = receivePacket();
     }
-    Serial.printf("BRIN received");
-    Serial.printf("init complete");
+    Serial.println("BRIN received");
+    Serial.println("init complete");
 }
 
 void PacketManager::sendPacket(String message) {
     udp.beginPacket(remoteIP, remotePort);
     udp.write((uint8_t*)message.c_str(), message.length());
+    Serial.println("I am sending");
     udp.endPacket();
 }
 
@@ -41,6 +42,6 @@ String PacketManager::receivePacket() {
         }
         return String(incomingPacket);
     }
-    return "";
+    return "Not received";
 }
 

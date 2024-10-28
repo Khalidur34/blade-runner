@@ -14,22 +14,26 @@ void MotionManager::setup(int pwmaPin, int ain1Pin, int ain2Pin) {
 
     digitalWrite(AIN1, LOW);
     digitalWrite(AIN2, LOW);
+
+    ledcAttachPin(PWMA, 0);  // Attach `enA` pin to PWM channel 0
+    ledcSetup(0, 5000, 8);
 }
 
 void MotionManager::forward(int speed) {
+    Serial.println("I am here");
     digitalWrite(AIN1, HIGH);   // Motor forward
     digitalWrite(AIN2, LOW);
-    analogWrite(PWMA, speed);   // PWM for x% speed
+    ledcWrite(0, speed);    // PWM for x% speed
 }
 
 void MotionManager::backward(int speed) {
     digitalWrite(AIN1, LOW);    // Motor backward
     digitalWrite(AIN2, HIGH);
-    analogWrite(PWMA, speed);   // PWM for x% speed
+    ledcWrite(0, speed);    // PWM for x% speed
 }
 
 void MotionManager::stop() {
     digitalWrite(AIN1, LOW);    // Stop the motor
     digitalWrite(AIN2, LOW);
-    analogWrite(PWMA, 0);       // Speed 0
+    ledcWrite(0, 0);        // Speed 0
 }

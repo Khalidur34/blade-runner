@@ -13,9 +13,7 @@ String Command::execStopo() {
 }
 
 String Command::execFSlowc() {
-    for(int i = 0 ; i < 150; i = i + 10) {
-        motionManager.forward(i);
-    }
+    motionManager.forward(150);
     return "AK:FSLOWC";
 }
 
@@ -23,7 +21,7 @@ String Command::execFFastc() {
     for(int i = 0 ; i < 200; i = i + 50) {
         motionManager.forward(i);
     }
-
+    
     return "AK:FFASTC";
 }
 

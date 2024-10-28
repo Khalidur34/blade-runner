@@ -7,6 +7,7 @@ void MotionManager::setup(int pwmaPin, int ain1Pin, int ain2Pin) {
     PWMA = pwmaPin;
     AIN1 = ain1Pin;
     AIN2 = ain2Pin;
+    vel = 0;
 
     pinMode(PWMA, OUTPUT);
     pinMode(AIN1, OUTPUT);
@@ -17,46 +18,44 @@ void MotionManager::setup(int pwmaPin, int ain1Pin, int ain2Pin) {
 }
 
 void MotionManager::forward(int speed) {
-    constrain(speed, 0, 255);
     digitalWrite(AIN1, HIGH);   // Motor forward
     digitalWrite(AIN2, LOW);
-    analogWrite(PWMA, speed);   // PWM for x% speed
+    while(vel < speed) {
+        currSpeed(vel);
+        vel++;
+    }
 }
 
 void MotionManager::backward(int speed) {
-    constrain(speed, 0, 255);
     digitalWrite(AIN1, LOW);    // Motor backward
     digitalWrite(AIN2, HIGH);
-    analogWrite(PWMA, speed);   // PWM for x% speed
+    while(vel < speed) {
+        currSpeed(vel);
+        vel++;
+    }
 }
 
 void MotionManager::stop() {
+    for(int i = vel; i >= 0 ; i-= 50) {
+        currSpeed(i);
+        vel = i;
+    }
     digitalWrite(AIN1, LOW);    // Stop the motor
-    digitalWrite(AIN2, LOW);
-    analogWrite(PWMA, 0);     
+    digitalWrite(AIN2, LOW);  
+    unsigned long stopTime = millis();
+    while(millis() - stopTime < 2000);  
+}
+
+void MotionManager::currSpeed(int speed) {
+    analogWrite(PWMA, speed);
+    delay(1);
 }
 
 void MotionManager::testMotor() {
-    stop();
-
-    // test fowards
-    delay(2000);
-    forward(200);
-    delay(5000);
-    stop();
-
-    // test backwards
-    delay(2000);
-    backward(100);
-    delay(5000);
-    stop();
-
-    // test backwards into forwards without stop
-    delay(2000);
-    forward(200);
-    delay(5000);
-    backward(100);
-    delay(5000);
-
-    stop();
+    // forward();
+    // delay(2000);
+    // stop();
+    // backward();
+    // delay(2000);
+    // stop();
 }

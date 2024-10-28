@@ -1,0 +1,8 @@
+{
+    "java.project.sourcePaths": [
+        "BR21\\src"
+    ],
+    "java.project.referencedLibraries": [
+        "BR21\\lib\\gson-2.10.1.jar"
+    ]
+}

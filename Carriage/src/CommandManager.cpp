@@ -56,12 +56,12 @@ void CommandManager::splitString(const String &str, char delimiter, String outpu
     int start = 0;
     int end = str.indexOf(delimiter);
 
-    // Loop through the string and split by delimiter
-    while (end != -1 && partIndex < maxParts) {
-        output[partIndex++] = str.substring(start, end);
-        start = end + 1;  // Move past the delimiter
-        end = str.indexOf(delimiter, start);
-    }
+//     // Loop through the string and split by delimiter
+//     while (end != -1 && partIndex < maxParts) {
+//         output[partIndex++] = str.substring(start, end);
+//         start = end + 1;  // Move past the delimiter
+//         end = str.indexOf(delimiter, start);
+//     }
     
     // Capture the last part (or the whole string if no delimiter was found)
     if (partIndex < maxParts) {

@@ -27,7 +27,8 @@ void PacketManager::init() {
 
 void PacketManager::sendPacket(String message) {
     udp.beginPacket(remoteIP, remotePort);
-    udp.write((uint8_t*) message.c_str(), message.length());
+    udp.write((uint8_t*)message.c_str(), message.length());
+    Serial.println("I am sending");
     udp.endPacket();
 }
 
@@ -40,6 +41,6 @@ String PacketManager::receivePacket() {
         }
         return String(incomingPacket);
     }
-    return "";
+    return "Not received";
 }
 

@@ -12,19 +12,17 @@ void PacketManager::setup(String remoteIP, unsigned int remotePort, unsigned int
 
 void PacketManager::begin() {
     udp.begin(localPort);
-    Serial.println("ready to send and receive commands");
 }
 
 // IMPROVEMENT: SET WAIT TIME FOR AKIN?
 void PacketManager::init() {
     sendPacket("BRIN"); //send init message
     String command;
-    Serial.println("waiting for BRIN");
-    while(command != "CCIN") { //will wait indefinitely until AKIN in received
+    Serial.println("!!! WAITING FOR AKIN FROM CCP");
+    while(command != "AKIN") { //will wait indefinitely until AKIN in received
         command = receivePacket();
     }
     Serial.println("BRIN received");
-    Serial.println("init complete");
 }
 
 void PacketManager::sendPacket(String message) {

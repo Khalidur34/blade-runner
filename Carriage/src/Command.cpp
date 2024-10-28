@@ -5,19 +5,20 @@
 
 String Command::execStopc() {
     motionManager.stop();
-    ledControl.changeColor("#FF0000");
+    ledControl.setColor(255, 0, 0);
     return "AK:STOPC";
 }
 
 String Command::execStopo() {
     motionManager.stop();
-    ledControl.changeColor("#FFA500");
+    ledControl.setColor(255, 165, 0);
     return "AK:STOPO";
 }
 
 String Command::execFFastc() {
     motionManager.stop();
     motionManager.forward(255);
+    ledControl.setColor(0, 255, 0);
     return "AK:FFASTC";
 }
 
@@ -27,7 +28,7 @@ String Command::execFFastc() {
 String Command::execFSlowc() {
     motionManager.stop();
     motionManager.forward(100);
-    ledControl.changeColor("#FFFF00");
+    ledControl.setColor(255, 255, 0);
     return "AK:FSLOWC";
 }
 
@@ -36,6 +37,6 @@ String Command::execFSlowc() {
 String Command::execRSlowc() {
     motionManager.stop();
     motionManager.backward(100);
-    ledControl.changeColor("#0000FF");
+    ledControl.setColor(0, 0, 255);
     return "AK:RSLOWC";
 }

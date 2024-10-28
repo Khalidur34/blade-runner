@@ -35,7 +35,7 @@ class STRQHandler implements MCPHandler {
         newMsg.addProperty("message", "STAT");
         newMsg.addProperty("status", SystemVariables.getCarriageState());
 
-        UDPSender.sendMessage(Constants.HOST_IP, Constants.MCP_PORT, newMsg.toString());
+        UDPSender.sendMessage(Constants.MCP_IP, Constants.MCP_PORT, newMsg.toString());
         System.out.println(newMsg.toString());
     }
 }
@@ -48,7 +48,7 @@ class EXECHandler implements MCPHandler {
         newMsg.addProperty("client_id", Constants.CLIENT_ID);
         newMsg.addProperty("sequence_number", SystemVariables.getAndIncrementMSequence());
         newMsg.addProperty("message", "AKEX");
-        UDPSender.sendMessage(Constants.HOST_IP, Constants.MCP_PORT, newMsg.toString());
+        UDPSender.sendMessage(Constants.MCP_IP, Constants.MCP_PORT, newMsg.toString());
 
         String action = json.get("action").getAsString();
         UDPSender.sendMessage(Constants.BR_IP, Constants.BR_PORT, "EXEC:" + action);
@@ -65,7 +65,7 @@ class NOIPHandler implements MCPHandler {
         newMsg.addProperty("sequence_number", SystemVariables.getAndIncrementMSequence());
         newMsg.addProperty("message", "NOIP");
 
-        UDPSender.sendMessage(Constants.HOST_IP, Constants.MCP_PORT, newMsg.toString());
+        UDPSender.sendMessage(Constants.MCP_IP, Constants.MCP_PORT, newMsg.toString());
         System.out.println(newMsg.toString());
     }
 }

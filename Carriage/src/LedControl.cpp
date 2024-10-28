@@ -25,8 +25,8 @@ void LedControl::setColor(int red, int green, int blue) {
 void LedControl::testLed() {
   setColor(255, 0, 0);  // Red
   delay(1000);
-  setColor(0, 255, 0);  // Red
+  setColor(0, 255, 0);  // Green
   delay(1000);
-  setColor(0, 0, 255);  // Red
+  setColor(0, 0, 255);  // Blue
   delay(1000);
 }

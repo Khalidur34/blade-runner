@@ -5,9 +5,10 @@
 
 class CommandManager {
     public:
+        void setup();
         String manage(String task);
         String getStatus();
-        String changeStatus();
+        void splitString(const String &str, char delimiter, String output[], int maxParts);
 
     private:
         Command command;

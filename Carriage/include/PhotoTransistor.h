@@ -5,13 +5,12 @@
 
 class PhotoTransistor {
 public:
-    PhotoTransistor(int pin, int threshold);
-    void setup();
+    void setup(int pinPHT, int threshold);
     bool isTriggered();
 
 private:
-    int _pin;
-    int _threshold;
+    int pinPHT;
+    int threshold;
 };
 
 #endif // PHOTOTRANSISTOR_H

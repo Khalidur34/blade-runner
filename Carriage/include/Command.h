@@ -3,9 +3,11 @@
 #include <Arduino.h>
 #include "MotionManager.h"
 #include "LedControl.h"
+#include "PhotoTransistor.h"
 
 class Command {
     public:
+        void setup();
         String execStopc();
         String execStopo();
         String execFSlowc();
@@ -14,6 +16,7 @@ class Command {
     private:
         MotionManager motionManager;
         LedControl ledControl;
+        PhotoTransistor photoTransistor;
 };
 
 #endif

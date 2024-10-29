@@ -7,6 +7,7 @@
 const int MAX_PARTS = 4;
 void CommandManager::setup() {
     status = "STOPC";
+    command.setup();
 }
 
 String CommandManager::manage(String message) {

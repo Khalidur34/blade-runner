@@ -1,8 +1,11 @@
 #include "Command.h"
-#define Threshold_Value
-#define min_Distance
 // this class contains the execution logic for each command
 // commands execute required actions and return the reply message
+
+void Command::setup(){
+    motionManager.setup();
+    photoTransistor.setup(7, 255);
+}
 
 String Command::execStopc() {
     motionManager.stop();
@@ -30,6 +33,12 @@ String Command::execFSlowc() {
     motionManager.stop();
     motionManager.forward(100);
     ledControl.setColor(255, 255, 0);
+    unsigned long previous = millis();
+    while(!photoTransistor.isTriggered()) {
+        if(millis() - previous >= 10) previous = millis();
+    }
+    motionManager.stop();
+
     return "AK:FSLOWC";
 }
 
@@ -39,6 +48,11 @@ String Command::execRSlowc() {
     motionManager.stop();
     motionManager.backward(100);
     ledControl.setColor(0, 0, 255);
+    unsigned long previous = millis();
+    while(!photoTransistor.isTriggered()) {
+        if(millis() - previous >= 10) previous = millis();
+    }
+    motionManager.stop();
     return "AK:RSLOWC";
 }
 

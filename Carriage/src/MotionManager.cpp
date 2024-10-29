@@ -3,12 +3,7 @@
 
 //this class is for motor setup and motor control
 
-void MotionManager::setup(int pwmaPin, int ain1Pin, int ain2Pin) {
-    PWMA = pwmaPin;
-    AIN1 = ain1Pin;
-    AIN2 = ain2Pin;
-    vel = 0;
-
+void MotionManager::setup() {
     pinMode(PWMA, OUTPUT);
     pinMode(AIN1, OUTPUT);
     pinMode(AIN2, OUTPUT);
